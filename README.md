@@ -45,3 +45,12 @@ Después, para visualizar el árbol sintáctico de cada programa, ejecutar:
 <p align="center">
   <img src="https://github.com/javiercarpio57/Analisis-Lexico-Sintactico/blob/main/Images/suma_parse_tree.svg">
 </p>
+
+## Errores léxicos y sintácticos
+
+Si eliminamos algún ';', '{', '}' del programa, se identificarán errores léxicos y sintácticos dentro del programa.
+<p align="center">
+  <img src="https://github.com/javiercarpio57/Analisis-Lexico-Sintactico/blob/main/Images/programa_error.JPG">
+</p><p align="center">
+  <img src="https://github.com/javiercarpio57/Analisis-Lexico-Sintactico/blob/main/Images/error.JPG">
+</p>
