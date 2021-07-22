@@ -1,0 +1,15 @@
+class Program{
+    int suma(int a, int b){
+        int c;
+        c = a + b;
+        return c;
+    }
+
+    void main(){
+        int num1; int num2;
+        int resultado;
+        num1 = 2;
+        num2 = 3;
+        resultado = suma(num1,num2);
+    }
+}
