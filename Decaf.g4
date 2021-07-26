@@ -16,6 +16,8 @@ ELSE                : 'else';
 
 FOR                 : 'for';
 
+WHILE               : 'while';
+
 RETURN              : 'return';
 
 BREAK               : 'break';
@@ -35,6 +37,8 @@ TRUE                : 'True';
 FALSE               : 'False';
 
 VOID                : 'void';
+
+STRUCT              : 'struct';
 
 CALLOUT             : 'callout';
 
@@ -93,6 +97,8 @@ EQUALITY_OP         : '==';
 
 UNEQUALITY_OP       : '!=';
 
+POINT               : '.';
+
 
 // Variable names & literal specification
 
@@ -129,19 +135,23 @@ NEWLINE				: ('\r'? '\n' | '\r')+ -> skip;
  * Parser Rules
  */
 
-program		        : CLASS PROGRAM LCURLY field_declr* method_declr* RCURLY;
+program		        : CLASS PROGRAM LCURLY (declaration)* RCURLY;
+
+declaration         : struct_declr | vardeclr | method_declr | field_declr ;
 
 vardeclr            : (var_type field_var) (COMMA var_type field_var)* SEMICOLON;
 
 field_declr         : var_type field_var (COMMA field_var)* SEMICOLON;
 
-array_id            : ID LSQUARE int_literal RSQUARE;
+array_id            : ID LSQUARE expr RSQUARE (POINT location)?;
 
 field_var           : var_id | array_id;
 
-var_id              : ID;
+var_id              : ID (POINT location)?;
 
-method_declr        : return_type method_name LROUND ((var_type var_id) (COMMA var_type var_id)*)? RROUND block;
+struct_declr        : STRUCT ID LCURLY (vardeclr)* RCURLY SEMICOLON;
+
+method_declr        : return_type method_name LROUND (((var_type var_id) | VOID) (COMMA var_type var_id)*)? RROUND block;
 
 return_type         : (var_type | VOID);
 
@@ -151,9 +161,9 @@ statement           : location assign_op expr
                     | location assign_op expr SEMICOLON
                     | method_call
                     | IF LROUND expr RROUND block (ELSE block)?
-                    | var_id EQUAL_OP expr SEMICOLON
+                    | WHILE LROUND expr RROUND block
+                    | location EQUAL_OP expr SEMICOLON
                     | RETURN expr SEMICOLON
-                    // ending value can be a variable or integer literal
                     | FOR var_id (EQUAL_OP int_literal)? COMMA ((var_id (EQUAL_OP int_literal)?) | int_literal) block
                     | BREAK SEMICOLON;
 
@@ -190,7 +200,7 @@ bin_op              : arith_op | rel_op | eq_op | cond_op;
 
 arith_op            : ADD | SUB | MULTIPLY | DIVIDE | REMINDER;
 
-var_type            : INT | BOOLEAN;
+var_type            : INT | BOOLEAN | STRUCT ID | struct_declr ;
 
 assign_op           : EQUAL_OP
                     | ADD_eq_op

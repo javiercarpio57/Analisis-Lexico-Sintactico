@@ -135,6 +135,12 @@ public class Lexer {
                 return "NEWLINE";
             case DecafLexer.WHITESPACE:
                 return "WHITESPACE";
+            case DecafLexer.STRUCT:
+                return "STRUCT";
+            case DecafLexer.WHILE:
+                return "WHILE";
+            case DecafLexer.POINT:
+                return "POINT";
             default:
                 return "OTRO";
         }

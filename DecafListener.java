@@ -17,6 +17,16 @@ public interface DecafListener extends ParseTreeListener {
 	 */
 	void exitProgram(DecafParser.ProgramContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DecafParser#declaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeclaration(DecafParser.DeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DecafParser#declaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeclaration(DecafParser.DeclarationContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DecafParser#vardeclr}.
 	 * @param ctx the parse tree
 	 */
@@ -66,6 +76,16 @@ public interface DecafListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitVar_id(DecafParser.Var_idContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DecafParser#struct_declr}.
+	 * @param ctx the parse tree
+	 */
+	void enterStruct_declr(DecafParser.Struct_declrContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DecafParser#struct_declr}.
+	 * @param ctx the parse tree
+	 */
+	void exitStruct_declr(DecafParser.Struct_declrContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DecafParser#method_declr}.
 	 * @param ctx the parse tree
